@@ -1,0 +1,51 @@
+<div class="container contact-form">
+  <div class="contact-image text-center">
+    <img src="https://cdn-icons-png.flaticon.com/512/17/17127.png" alt="Lettre" class="img-responsive" style="width: 200px; height: 200px; margin: 0 auto; margin-bottom: 80px;">
+  </div>
+
+  <% if flash[:error] %>
+     <div class="alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <% if flash[:success] %>
+    <div class="alert alert-success">
+      <%= flash[:success] %>
+    </div>
+  <% end %>
+
+  <%= form_for @gossip, url: gossips_path, html: { class: 'contact-form' } do |f| %>
+    <h3>Ajoutez votre potin</h3>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.text_field :title, class: 'form-control', placeholder: 'Titre *', value: '' %>
+          <p class="text-danger"><%= @gossip.errors[:title].join(' - ') %></p>
+        </div>
+        <div class="form-group">
+          <%= f.text_area :content, class: 'form-control', placeholder: 'Contenu *', style: 'width: 100%; height: 150px;' %>
+          <p class="text-danger"><%= @gossip.errors[:content].join(' - ') %></p>
+        </div>
+        <div class="form-group">
+          <input type="submit" name="commit" value="Valider" class="btn btn-primary">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <p>Merci de respecter ces quelques consignes avant de poster :
+        <ul>
+         <li>Evitez le language SMS</li>
+         <li>Pas de grossièreté</li>
+         <li>Ne postez pas d'informations personnelles</li>
+         <li>Respectez les autres membres de la communauté</li>
+        </ul>
+        Notre équipe compte sur la bienveillance de chacun, sans quoi votre potin sera supprimé.
+          </p>
+      </div>
+    </div>
+  <% end %>
+
+  <p>* Ces champs sont obligatoires</p>
+</div>
+

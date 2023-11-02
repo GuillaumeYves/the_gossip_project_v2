@@ -1,0 +1,27 @@
+<div class="jumbotron-hero">
+  <div class="container text-center" >
+    <h1 class="display-4 pt-5 font-weight-bold text-dark"><em>THE GOSSIP PROJECT</em></h1>
+    <p class="lead pt-5 text-dark ">Rejoignez la communauté et partagez vos potins avec d'autre membres!</p>
+    <%= link_to "Créer un compte", {controller: "static_pages", action: "home"}, class: "btn btn-primary btn-lg mt-5 mr-4 " %>
+    <%= link_to "Se connecter", { controller: "static_pages", action: "home" }, class: "btn btn-primary btn-lg mt-5 mr-4" %>
+  </div>
+</div>
+
+ <hr style="margin-top: 50px;">
+
+
+<div class="container-fluid">
+  <div class="row" style="margin-top: 20px;">
+   <% params[:gossip_array].each do |gossip| %>
+      <div class="col-4 col-sm-4 col-md-4 col-lg-4 mt-5">
+        <div class="card mx-auto" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= gossip.title %></h5>
+            <p class="card-title">Potin posté par : <%= link_to gossip.user.first_name, dynamic_pages_user_path(:id => gossip.user.id) %></p>
+            <%= link_to "Voir le potin", dynamic_pages_gossip_path(:id => gossip.id), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
